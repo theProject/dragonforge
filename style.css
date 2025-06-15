@@ -784,9 +784,9 @@ table.popup-table .link{
     position:absolute;
     display:block;
     padding:0px 0;
-    border:2px solid var(--primary-800);
+    border:2px solid var(--neutral-100);
     border-radius:8px;
-    box-shadow:1px 1px 2px var(--primary-500);
+    box-shadow:1px 1px 2px (--neutral-100);
     width: 200px;
 }
 
@@ -798,12 +798,13 @@ table.popup-table .link{
 
 .context-menu-items a{
     display:block;
-    padding:5px;
+    padding:10px;
     cursor:pointer;
+    color: white !important;
 }
 
 .context-menu-items a:hover{
-    background: var(--primary-700);
+    background: var(--neutral-100);
 }
 
 
@@ -2463,8 +2464,8 @@ button [data-lucide] {
     content: '';
     display: inline-block;
     /*TEMP/PERM FIX: Use a fixed size for stability */
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     vertical-align: text-bottom;
     
     /* TEMP/PERM FIX: Force a default visible background color */
@@ -2513,23 +2514,30 @@ button [data-lucide] {
     height: 20px;
 }
 
-/* --- Example: Make the 'random seed' dice icon smaller --- */
+/* --- Example: Make the 'random seed' dice icon smaller --- 
 #txt2img_random_seed.has-icon::before,
 #img2img_random_seed.has-icon::before {
 	width: 14px;
 	height: 14px;
-}
-
-/* --- Example: Change an icon's color --- */
-/* This would make the settings icon your theme's pink color */
+} */
+/* Icon Color Overrides 
 [data-icon-name="settings"]::before {
-    background-color: #e20074;
+    background-color: #e20074; 
+} */
+
+/* ========================================
+   FIX FOR GENERATE BUTTON RIGHT-CLICK MENU
+   ======================================== */
+
+/* This targets the menu items that appear on right-click */
+.gradio-context-menu .item {
+    /* Sets the text color to be easily readable */
+    color: white !important;
 }
 
-/* --- Example: Add a glow effect --- */
-/* This would make the sparkles icon actually glow */
-[data-icon-name="flame"]::before {
-    filter: drop-shadow(0 0 5px #e0e0e0);
+/* This specifically finds and hides our "play" icon, but ONLY inside that menu */
+.gradio-context-menu .item.has-icon::before {
+    display: none !important;
 }
 
 /* ========================================

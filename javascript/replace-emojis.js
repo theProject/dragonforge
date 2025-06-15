@@ -39,7 +39,7 @@
 
     function tagElementsForIcons() {
         const elements = document.querySelectorAll('button, .button, a, .tab-nav button, .label-wrap, [role="button"]');
-        const textToKeep = ['GENERATE', 'INTERRUPT', 'SKIP'];
+        const textToKeep = ['Generate', 'INTERRUPT', 'SKIP'];
 
         elements.forEach(el => {
             if (el.dataset.iconTagged) return;
