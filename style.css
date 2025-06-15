@@ -2122,55 +2122,6 @@ a:hover {
 
 </style>
 
-/* ========================================
-   ADD THIS TO THE END OF YOUR style.css FILE
-   (After all your existing dark theme CSS)
-   ======================================== */
-
-/* ========================================
-   LUCIDE ICON LIBRARY INJECTION
-   ======================================== */
-</style>
-
-<script>
-(function() {
-    // Only load once
-    if (window.lucideLoaded) return;
-    window.lucideLoaded = true;
-    
-    // Create and inject Lucide script
-    const script = document.createElement('script');
-    script.src = 'https://unpkg.com/lucide@latest/dist/umd/lucide.js';
-    script.onload = function() {
-        if (window.lucide) {
-            lucide.createIcons();
-            
-            // Auto-update icons when new content loads (for dynamic WebUI content)
-            const observer = new MutationObserver(function(mutations) {
-                let needsUpdate = false;
-                mutations.forEach(function(mutation) {
-                    if (mutation.addedNodes.length > 0) {
-                        needsUpdate = true;
-                    }
-                });
-                if (needsUpdate) {
-                    setTimeout(() => lucide.createIcons(), 100);
-                }
-            });
-            
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
-            
-            console.log('✅ Lucide icons loaded successfully!');
-        }
-    };
-    
-    document.head.appendChild(script);
-    console.log('🎨 Loading Lucide icons...');
-})();
-</script>
 
 <style>
 /* ========================================
@@ -2467,6 +2418,11 @@ button [data-lucide] {
     height: 16px;
 }
 
+/* This rule breaks the chain by forcing a new color */
+.gradio-button.tool svg {
+    color: #e0e0e0 !important;
+    stroke: #e0e0e0 !important;
+}
 /* ========================================
    RESPONSIVE ADJUSTMENTS
    ======================================== */
@@ -2492,171 +2448,113 @@ button [data-lucide] {
    END ICON STYLES
    ======================================== */
 
-// Fixed Gradio Icon Replacement Script
-// Add this to your style.css AFTER the Lucide loading script
+/* ========================================
+   THE GREAT REPLACEMENT - NEW ICON SYSTEM - LUICIDE MEETS DATA SCIENCE (CSS MASKING) - v3
+   ======================================== */
 
-<script>
-(function() {
-    console.log('🎯 Starting Gradio icon replacement system...');
+/* Base style for any element this tags */
+.has-icon {
+    position: relative;
+    overflow: hidden; 
+}
+
+/* Create the icon using the ::before pseudo-element */
+.has-icon::before {
+    content: '';
+    display: inline-block;
+    /*TEMP/PERM FIX: Use a fixed size for stability */
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
     
-    const iconMap = {
-        '🎲': '<i data-lucide="dice-6" class="webui-icon"></i>',
-        '♻️': '<i data-lucide="refresh-cw" class="webui-icon"></i>',
-        '📂': '<i data-lucide="folder" class="webui-icon"></i>',
-        '⚙️': '<i data-lucide="settings" class="webui-icon"></i>',
-        '🔍': '<i data-lucide="search" class="webui-icon"></i>',
-        '💾': '<i data-lucide="save" class="webui-icon"></i>',
-        '🗑️': '<i data-lucide="trash-2" class="webui-icon"></i>',
-        '📋': '<i data-lucide="clipboard" class="webui-icon"></i>',
-        '🔄': '<i data-lucide="refresh-cw" class="webui-icon"></i>',
-        '🎯': '<i data-lucide="target" class="webui-icon"></i>',
-        '🛈': '<i data-lucide="info" class="webui-icon"></i>',
-        '🛠': '<i data-lucide="wrench" class="webui-icon"></i>',
-        '⎘': '<i data-lucide="copy" class="webui-icon"></i>',
-        'Generate': '<i data-lucide="play" class="webui-icon"></i>Generate',
-        'Interrupt': '<i data-lucide="square" class="webui-icon"></i>Interrupt',
-        'Skip': '<i data-lucide="skip-forward" class="webui-icon"></i>Skip'
-    };
-    
-    function waitForLucide(callback) {
-        if (window.lucide && typeof window.lucide.createIcons === 'function') {
-            console.log('✅ Lucide is ready, starting icon replacement');
-            callback();
-        } else {
-            console.log('⏳ Waiting for Lucide to load...');
-            setTimeout(() => waitForLucide(callback), 500);
-        }
-    }
-    
-    function replaceIconsInElement(element) {
-        if (!element || !element.innerHTML) return;
-        
-        let originalHTML = element.innerHTML;
-        let newHTML = originalHTML;
-        let changed = false;
-        
-        Object.entries(iconMap).forEach(([oldIcon, newIcon]) => {
-            if (newHTML.includes(oldIcon)) {
-                newHTML = newHTML.replace(new RegExp(oldIcon, 'g'), newIcon);
-                changed = true;
-            }
-        });
-        
-        if (changed) {
-            element.innerHTML = newHTML;
-            console.log('🔄 Replaced icons in:', element.tagName, element.className || element.id || '');
-        }
-    }
-    
-    function replaceAllIcons() {
-        // Target specific Gradio elements and common containers
-        const selectors = [
-            'button',
-            '.gradio-button',
-            '.tab-nav button',
-            '.gradio-textbox label',
-            '.gradio-dropdown label',
-            '.gradio-slider label',
-            '.gradio-checkbox label',
-            '.gradio-radio label',
-            '.gradio-accordion .label-wrap',
-            '#quicksettings span',
-            '#quicksettings label',
-            '.extra-network-pane button',
-            '.extra-network-pane .card .actions',
-            '#footer a',
-            '.gradio-html',
-            '.gr-button',
-            '[role="button"]'
-        ];
-        
-        let replacementCount = 0;
-        
-        selectors.forEach(selector => {
-            try {
-                const elements = document.querySelectorAll(selector);
-                elements.forEach(element => {
-                    const before = element.innerHTML;
-                    replaceIconsInElement(element);
-                    if (element.innerHTML !== before) {
-                        replacementCount++;
-                    }
-                });
-            } catch (e) {
-                console.warn('Error processing selector:', selector, e);
-            }
-        });
-        
-        // Re-initialize icons if we made changes and Lucide is available
-        if (replacementCount > 0 && window.lucide) {
-            try {
-                lucide.createIcons();
-                console.log(`✅ Replaced icons in ${replacementCount} elements`);
-            } catch (e) {
-                console.warn('Error creating Lucide icons:', e);
-            }
-        }
-        
-        return replacementCount;
-    }
-    
-    function startReplacementSystem() {
-        // Initial replacement
-        setTimeout(() => {
-            replaceAllIcons();
-        }, 1000);
-        
-        // Set up observer for dynamic content
-        const observer = new MutationObserver(function(mutations) {
-            let shouldReplace = false;
-            
-            mutations.forEach(function(mutation) {
-                if (mutation.addedNodes && mutation.addedNodes.length > 0) {
-                    mutation.addedNodes.forEach(function(node) {
-                        if (node.nodeType === Node.ELEMENT_NODE) {
-                            // Check if the added node contains buttons or other target elements
-                            if (node.tagName === 'BUTTON' || 
-                                node.querySelector && (
-                                    node.querySelector('button') ||
-                                    node.querySelector('.gradio-button') ||
-                                    node.classList && (
-                                        node.classList.contains('gradio-button') ||
-                                        node.classList.contains('tab-nav')
-                                    )
-                                )) {
-                                shouldReplace = true;
-                            }
-                        }
-                    });
-                }
-            });
-            
-            if (shouldReplace) {
-                setTimeout(() => {
-                    const count = replaceAllIcons();
-                    if (count > 0) {
-                        console.log('🔄 Auto-replaced icons in new content');
-                    }
-                }, 200);
-            }
-        });
-        
-        // Start observing
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-        
-        console.log('🔄 Icon replacement observer activated');
-        
-        // Also run replacement periodically for any missed elements
-        setInterval(() => {
-            replaceAllIcons();
-        }, 5000);
-    }
-    
-    // Wait for Lucide to be ready, then start the replacement system
-    waitForLucide(startReplacementSystem);
-    
-})();
-</script>
+    /* TEMP/PERM FIX: Force a default visible background color */
+    background-color: #e0e0e0; 
+
+    /* Masking properties */
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+
+/* Style for buttons with text (like "Generate") */
+.icon-with-text::before {
+    margin-right: 0.5em; /* Space between icon and text */
+}
+
+/* Center icons in buttons that don't have text */
+.has-icon:not(.icon-with-text)::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/* This ensures icons on magenta buttons are white */
+.gradio-button.primary.has-icon::before {
+    background-color: white !important;
+}
+/* Added this to ensure icons on grey tool buttons are visible */
+.gradio-button.tool.has-icon::before {
+    background-color: #e0e0e0 !important;
+}
+
+/* ========================================
+   ICON STYLE CONTROLS (v4 Final)
+   Use these rules to customize specific icons.
+   ======================================== */
+
+/* --- Example: Make the 'Generate' button icon larger --- */
+/* This targets the button by its ID */
+#txt2img_generate.has-icon::before,
+#img2img_generate.has-icon::before {
+    width: 20px;
+    height: 20px;
+}
+
+/* --- Example: Make the 'random seed' dice icon smaller --- */
+#txt2img_random_seed.has-icon::before,
+#img2img_random_seed.has-icon::before {
+	width: 14px;
+	height: 14px;
+}
+
+/* --- Example: Change an icon's color --- */
+/* This would make the settings icon your theme's pink color */
+[data-icon-name="settings"]::before {
+    background-color: #e20074;
+}
+
+/* --- Example: Add a glow effect --- */
+/* This would make the sparkles icon actually glow */
+[data-icon-name="flame"]::before {
+    filter: drop-shadow(0 0 5px #e0e0e0);
+}
+
+/* ========================================
+   INDIVIDUAL ICON DEFINITIONS
+   ======================================== */
+
+[data-icon-name="book-open"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/book-open.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/book-open.svg); }
+[data-icon-name="dice-6"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/dice-6.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/dice-6.svg); }
+[data-icon-name="refresh-cw"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/refresh-cw.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/refresh-cw.svg); }
+[data-icon-name="folder"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/folder.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/folder.svg); }
+[data-icon-name="settings"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/settings.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/settings.svg); }
+[data-icon-name="search"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/search.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/search.svg); }
+[data-icon-name="save"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/save.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/save.svg); }
+[data-icon-name="trash-2"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/trash-2.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/trash-2.svg); }
+[data-icon-name="clipboard"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/clipboard.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/clipboard.svg); }
+[data-icon-name="target"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/target.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/target.svg); }
+[data-icon-name="folder-archive"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/folder-archive.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/folder-archive.svg); }
+[data-icon-name="palette"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/palette.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/palette.svg); }
+[data-icon-name="bomb"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/bomb.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/bomb.svg); }
+[data-icon-name="info"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/info.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/info.svg); }
+[data-icon-name="wrench"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/wrench.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/wrench.svg); }
+[data-icon-name="brush"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/brush.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/brush.svg); }
+[data-icon-name="copy"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/copy.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/copy.svg); }
+[data-icon-name="play"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/play.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/play.svg); }
+[data-icon-name="square"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/square.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/square.svg); }
+[data-icon-name="skip-forward"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/skip-forward.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/skip-forward.svg); }
+[data-icon-name="image"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/image.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/image.svg); }
+[data-icon-name="flame"]::before { -webkit-mask-image: url(https://unpkg.com/lucide-static@latest/icons/flame.svg); mask-image: url(https://unpkg.com/lucide-static@latest/icons/flame.svg); }
