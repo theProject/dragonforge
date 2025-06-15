@@ -1665,3 +1665,998 @@ body.resizing .resize-handle {
     visibility: visible;
     width: auto;
 }
+
+/* ========================================
+   DEEP DARK THEME FOR STABLE DIFFUSION WEBUI
+   Add this to the END of your style.css file
+   ======================================== */
+
+/* === ROOT VARIABLES OVERRIDE === */
+:root, .dark {
+    /* Main backgrounds - Very dark blacks */
+    --background-fill-primary: #0a0a0a !important;
+    --background-fill-secondary: #111111 !important;
+    --body-background-fill: #0a0a0a !important;
+    --panel-background-fill: #111111 !important;
+    --block-background-fill: #151515 !important;
+    
+    /* Input and form backgrounds */
+    --input-background-fill: #1a1a1a !important;
+    --neutral-50: #0a0a0a !important;
+    --neutral-100: #151515 !important;
+    --neutral-200: #202020 !important;
+    --neutral-300: #2a2a2a !important;
+    --neutral-400: #404040 !important;
+    --neutral-500: #555555 !important;
+    --neutral-600: #666666 !important;
+    --neutral-700: #777777 !important;
+    --neutral-800: #1a1a1a !important;
+    --neutral-900: #111111 !important;
+    --neutral-950: #0a0a0a !important;
+    
+    /* Text colors */
+    --body-text-color: #e0e0e0 !important;
+    --body-text-color-subdued: #b0b0b0 !important;
+    --block-title-text-color: #f0f0f0 !important;
+    --block-label-text-color: #d0d0d0 !important;
+    --input-placeholder-color: #888888 !important;
+    
+    /* Button colors */
+    --button-primary-background-fill: #2a2a2a !important;
+    --button-primary-background-fill-hover: #3a3a3a !important;
+    --button-primary-text-color: #e0e0e0 !important;
+    --button-primary-text-color-hover: #ffffff !important;
+    --button-primary-border-color: #404040 !important;
+    
+    --button-secondary-background-fill: #1a1a1a !important;
+    --button-secondary-background-fill-hover: #2a2a2a !important;
+    --button-secondary-text-color: #d0d0d0 !important;
+    --button-secondary-text-color-hover: #ffffff !important;
+    --button-secondary-border-color: #333333 !important;
+    
+    /* Border colors */
+    --border-color-primary: #333333 !important;
+    --border-color-accent: #404040 !important;
+    --block-border-color: #2a2a2a !important;
+    --block-border-width: 1px !important;
+    
+    /* Shadows for depth */
+    --shadow-drop: 0 4px 8px rgba(0, 0, 0, 0.5) !important;
+    --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    --button-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    
+    /* Focus and selection */
+    --color-accent: #e20074 !important;
+    --color-accent-soft: #b8005a !important;
+}
+
+/* === BODY AND MAIN CONTAINER === */
+body {
+    background-color: #0a0a0a !important;
+    color: #e0e0e0 !important;
+}
+
+.gradio-container,
+div.gradio-container {
+    background: #0a0a0a !important;
+    color: #e0e0e0 !important;
+}
+
+/* === MAIN CONTENT AREAS === */
+.main {
+    background: #0a0a0a !important;
+}
+
+/* === TABS === */
+div.tab-nav button {
+    background: #1a1a1a !important;
+    color: #d0d0d0 !important;
+    border: 1px solid #333333 !important;
+    border-bottom: none !important;
+}
+
+div.tab-nav button.selected {
+    background: linear-gradient(135deg, #e20074 0%, #c4006a 100%) !important;
+    color: #ffffff !important;
+    border-color: #e20074 !important;
+    box-shadow: 0 2px 8px rgba(226, 0, 116, 0.4) !important;
+}
+
+div.tab-nav button:hover {
+    background: #2a2a2a !important;
+    color: #ffffff !important;
+    border-color: #e20074 !important;
+}
+
+/* === FORM ELEMENTS === */
+div.form {
+    background: #111111 !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 8px !important;
+}
+
+/* === INPUTS === */
+.gradio-textbox input,
+.gradio-textbox textarea,
+.gradio-number input,
+.gradio-slider input {
+    background: #1a1a1a !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #333333 !important;
+    border-radius: 4px !important;
+}
+
+.gradio-textbox input:focus,
+.gradio-textbox textarea:focus,
+.gradio-number input:focus {
+    border-color: #e20074 !important;
+    box-shadow: 0 0 0 2px rgba(226, 0, 116, 0.2) !important;
+}
+
+/* === DROPDOWNS === */
+.gradio-dropdown {
+    background: #1a1a1a !important;
+    border: 1px solid #333333 !important;
+    border-radius: 4px !important;
+}
+
+.gradio-dropdown .wrap {
+    background: #1a1a1a !important;
+}
+
+.gradio-dropdown ul.options {
+    background: #1a1a1a !important;
+    border: 1px solid #333333 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6) !important;
+}
+
+.gradio-dropdown ul.options li.item {
+    color: #d0d0d0 !important;
+    background: transparent !important;
+}
+
+.gradio-dropdown ul.options li.item:hover {
+    background: #2a2a2a !important;
+    color: #ffffff !important;
+}
+
+.gradio-dropdown ul.options li.item.selected {
+    background: #e20074 !important;
+    color: #ffffff !important;
+}
+
+/* === BUTTONS === */
+.gradio-button,
+button {
+    background: linear-gradient(135deg, #e20074 0%, #c4006a 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid #e20074 !important;
+    border-radius: 6px !important;
+    box-shadow: 0 2px 6px rgba(226, 0, 116, 0.3) !important;
+    font-weight: 500 !important;
+}
+
+.gradio-button:hover,
+button:hover {
+    background: linear-gradient(135deg, #ff0080 0%, #e20074 100%) !important;
+    color: #ffffff !important;
+    border-color: #ff0080 !important;
+    box-shadow: 0 4px 12px rgba(226, 0, 116, 0.5) !important;
+    transform: translateY(-1px) !important;
+}
+
+.gradio-button:active,
+button:active {
+    background: linear-gradient(135deg, #b8005a 0%, #a0004d 100%) !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+    transform: translateY(0px) !important;
+}
+
+/* === GENERATE BUTTON (SPECIAL) === */
+#txt2img_generate,
+#img2img_generate {
+    background: linear-gradient(135deg, #e20074 0%, #c4006a 50%, #a0004d 100%) !important;
+    border: 2px solid #e20074 !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    box-shadow: 0 4px 12px rgba(226, 0, 116, 0.4) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+#txt2img_generate:hover,
+#img2img_generate:hover {
+    background: linear-gradient(135deg, #ff0080 0%, #e20074 50%, #c4006a 100%) !important;
+    border-color: #ff0080 !important;
+    box-shadow: 0 6px 20px rgba(226, 0, 116, 0.6) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* === CONTROL BUTTONS (SKIP/INTERRUPT) === */
+.gradio-button.generate-box-skip,
+.gradio-button.generate-box-interrupt,
+.gradio-button.generate-box-interrupting {
+    background: #333333 !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #555555 !important;
+}
+
+.gradio-button.generate-box-skip:hover,
+.gradio-button.generate-box-interrupt:hover,
+.gradio-button.generate-box-interrupting:hover {
+    background: #444444 !important;
+    color: #ffffff !important;
+}
+
+/* === PROGRESS BAR === */
+.progressDiv {
+    background: #1a1a1a !important;
+    border: 1px solid #333333 !important;
+    border-radius: 4px !important;
+}
+
+.progressDiv .progress {
+    background: linear-gradient(90deg, #e20074 0%, #ff0080 100%) !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* === GALLERY === */
+.gradio-gallery {
+    background: #111111 !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 8px !important;
+}
+
+.gradio-gallery .thumbnails {
+    background: #111111 !important;
+}
+
+.gradio-gallery .thumbnail-item {
+    border: 1px solid #333333 !important;
+    border-radius: 4px !important;
+}
+
+.gradio-gallery .thumbnail-item:hover {
+    border-color: #e20074 !important;
+    box-shadow: 0 2px 8px rgba(226, 0, 116, 0.3) !important;
+}
+
+.gradio-gallery .thumbnail-item.selected {
+    border-color: #e20074 !important;
+    box-shadow: 0 0 0 2px rgba(226, 0, 116, 0.4) !important;
+}
+
+/* === ACCORDION === */
+div.block.gradio-accordion {
+    background: #151515 !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 8px !important;
+}
+
+.gradio-accordion .label-wrap {
+    background: #1a1a1a !important;
+    color: #e0e0e0 !important;
+    border-bottom: 1px solid #2a2a2a !important;
+}
+
+/* === EXTRA NETWORKS === */
+.extra-network-pane {
+    background: #111111 !important;
+    border: 1px solid #2a2a2a !important;
+}
+
+.extra-network-pane .extra-network-cards {
+    background: #111111 !important;
+    border: 1px solid #2a2a2a !important;
+}
+
+.extra-network-pane .card {
+    background: #1a1a1a !important;
+    border: 1px solid #333333 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+}
+
+.extra-network-pane .card:hover {
+    border-color: #e20074 !important;
+    box-shadow: 0 4px 12px rgba(226, 0, 116, 0.3) !important;
+}
+
+.extra-network-pane .card .actions {
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 100%) !important;
+}
+
+/* === QUICKSETTINGS === */
+#quicksettings {
+    background: #111111 !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+}
+
+/* === SETTINGS === */
+#settings {
+    background: #0a0a0a !important;
+}
+
+#settings > div {
+    background: #111111 !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 8px !important;
+}
+
+#settings > div.tab-nav {
+    background: #151515 !important;
+}
+
+#settings > div.tab-nav button {
+    background: #1a1a1a !important;
+    color: #d0d0d0 !important;
+    border: none !important;
+}
+
+#settings > div.tab-nav button:hover {
+    background: #2a2a2a !important;
+    color: #ffffff !important;
+}
+
+#settings > div.tab-nav button.selected {
+    background: linear-gradient(135deg, #e20074 0%, #c4006a 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(226, 0, 116, 0.3) !important;
+}
+
+/* === CHECKBOXES === */
+.gradio-checkbox input[type="checkbox"] {
+    background: #1a1a1a !important;
+    border: 1px solid #404040 !important;
+}
+
+.gradio-checkbox input[type="checkbox"]:checked {
+    background: #e20074 !important;
+    border-color: #e20074 !important;
+}
+
+/* === SLIDERS === */
+.gradio-slider .wrap {
+    background: #1a1a1a !important;
+}
+
+.gradio-slider input[type="range"] {
+    background: #2a2a2a !important;
+}
+
+/* === TOKEN COUNTER === */
+.block.token-counter span {
+    background: #1a1a1a !important;
+    border: 1px solid #404040 !important;
+    color: #d0d0d0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+.block.token-counter.error span {
+    border-color: #ff4444 !important;
+    background: #2a1a1a !important;
+}
+
+/* === MODAL/POPUP === */
+.global-popup {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.global-popup-inner {
+    background: #111111 !important;
+    border: 1px solid #333333 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* === LIGHTBOX MODAL === */
+#lightboxModal {
+    background-color: rgba(0, 0, 0, 0.95) !important;
+}
+
+.modalControls {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* === SCROLLBARS === */
+::-webkit-scrollbar {
+    width: 12px !important;
+    background-color: #1a1a1a !important;
+}
+
+::-webkit-scrollbar-track {
+    background: #111111 !important;
+    border-radius: 6px !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #404040 !important;
+    border-radius: 6px !important;
+    border: 2px solid #1a1a1a !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555555 !important;
+}
+
+/* === LABELS === */
+label {
+    color: #d0d0d0 !important;
+}
+
+label span {
+    color: #e0e0e0 !important;
+}
+
+/* === FINAL OVERRIDES === */
+* {
+    color: inherit !important;
+}
+
+/* Text that should stay bright */
+h1, h2, h3, h4, h5, h6 {
+    color: #f0f0f0 !important;
+}
+
+/* Links */
+a {
+    color: #e20074 !important;
+}
+
+a:hover {
+    color: #ff0080 !important;
+}
+
+/* Performance text styling */
+.html-log .performance p.time,
+.performance p.vram,
+.performance p.profile {
+    color: #b0b0b0 !important;
+}
+
+.html-log .performance .measurement {
+    color: #e0e0e0 !important;
+}
+
+</style>
+
+/* ========================================
+   ADD THIS TO THE END OF YOUR style.css FILE
+   (After all your existing dark theme CSS)
+   ======================================== */
+
+/* ========================================
+   LUCIDE ICON LIBRARY INJECTION
+   ======================================== */
+</style>
+
+<script>
+(function() {
+    // Only load once
+    if (window.lucideLoaded) return;
+    window.lucideLoaded = true;
+    
+    // Create and inject Lucide script
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/lucide@latest/dist/umd/lucide.js';
+    script.onload = function() {
+        if (window.lucide) {
+            lucide.createIcons();
+            
+            // Auto-update icons when new content loads (for dynamic WebUI content)
+            const observer = new MutationObserver(function(mutations) {
+                let needsUpdate = false;
+                mutations.forEach(function(mutation) {
+                    if (mutation.addedNodes.length > 0) {
+                        needsUpdate = true;
+                    }
+                });
+                if (needsUpdate) {
+                    setTimeout(() => lucide.createIcons(), 100);
+                }
+            });
+            
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+            
+            console.log('✅ Lucide icons loaded successfully!');
+        }
+    };
+    
+    document.head.appendChild(script);
+    console.log('🎨 Loading Lucide icons...');
+})();
+</script>
+
+<style>
+/* ========================================
+   WEBUI ICON BASE STYLES
+   ======================================== */
+
+.webui-icon {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+    color: #e0e0e0 !important;
+    stroke: #e0e0e0 !important;
+    stroke-width: 2;
+}
+
+.webui-icon-accent {
+    color: #e20074 !important;
+    stroke: #e20074 !important;
+}
+
+/* Button icon inheritance */
+.gradio-button .webui-icon,
+button .webui-icon,
+.gradio-button [data-lucide],
+button [data-lucide] {
+    color: inherit !important;
+    stroke: currentColor !important;
+}
+
+/* ========================================
+   ICON SIZE VARIATIONS
+   ======================================== */
+
+.webui-icon-small {
+    width: 14px;
+    height: 14px;
+}
+
+.webui-icon-large {
+    width: 20px;
+    height: 20px;
+}
+
+.webui-icon-huge {
+    width: 24px;
+    height: 24px;
+}
+
+/* ========================================
+   BACKGROUND STYLES
+   ======================================== */
+
+.webui-icon-circle {
+    background: #e20074;
+    border-radius: 50%;
+    padding: 4px;
+    color: white !important;
+    stroke: white !important;
+}
+
+.webui-icon-circle-outline {
+    border: 2px solid #e20074;
+    border-radius: 50%;
+    padding: 3px;
+    color: #e20074 !important;
+    stroke: #e20074 !important;
+}
+
+.webui-icon-square {
+    background: #e20074;
+    border-radius: 4px;
+    padding: 4px;
+    color: white !important;
+    stroke: white !important;
+}
+
+.webui-icon-square-outline {
+    border: 2px solid #e20074;
+    border-radius: 4px;
+    padding: 3px;
+    color: #e20074 !important;
+    stroke: #e20074 !important;
+}
+
+.webui-icon-gradient {
+    background: linear-gradient(135deg, #e20074 0%, #ff0080 100%);
+    border-radius: 6px;
+    padding: 4px;
+    color: white !important;
+    stroke: white !important;
+}
+
+/* ========================================
+   FILL AND STROKE VARIATIONS
+   ======================================== */
+
+.webui-icon-filled {
+    stroke-width: 3 !important;
+    fill: #e20074 !important;
+    stroke: #e20074 !important;
+}
+
+.webui-icon-outlined {
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 2 !important;
+}
+
+.webui-icon-thick {
+    stroke-width: 3 !important;
+}
+
+.webui-icon-thin {
+    stroke-width: 1 !important;
+}
+
+.webui-icon-solid {
+    fill: currentColor !important;
+    stroke: none !important;
+}
+
+/* ========================================
+   VISUAL EFFECTS
+   ======================================== */
+
+.webui-icon-glow {
+    filter: drop-shadow(0 0 6px #e20074);
+    color: #e20074 !important;
+    stroke: #e20074 !important;
+}
+
+.webui-icon-shadow {
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.webui-icon-glow-white {
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+.webui-icon-spin {
+    animation: webui-spin 2s linear infinite;
+}
+
+.webui-icon-pulse {
+    animation: webui-pulse 2s ease-in-out infinite;
+}
+
+.webui-icon-bounce {
+    animation: webui-bounce 1s ease infinite;
+}
+
+.webui-icon-fade {
+    animation: webui-fade 2s ease-in-out infinite;
+}
+
+@keyframes webui-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes webui-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+@keyframes webui-bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-6px); }
+    60% { transform: translateY(-3px); }
+}
+
+@keyframes webui-fade {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ========================================
+   INTERACTIVE STYLES
+   ======================================== */
+
+.webui-icon-button {
+    background: #2a2a2a;
+    border: 1px solid #404040;
+    border-radius: 6px;
+    padding: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #e0e0e0 !important;
+    stroke: #e0e0e0 !important;
+}
+
+.webui-icon-button:hover {
+    background: #e20074;
+    border-color: #e20074;
+    color: white !important;
+    stroke: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(226, 0, 116, 0.3);
+}
+
+.webui-icon-clickable {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.webui-icon-clickable:hover {
+    color: #e20074 !important;
+    stroke: #e20074 !important;
+    transform: scale(1.1);
+}
+
+/* ========================================
+   STATUS COLORS
+   ======================================== */
+
+.webui-icon-success {
+    color: #4caf50 !important;
+    stroke: #4caf50 !important;
+}
+
+.webui-icon-warning {
+    color: #ff9800 !important;
+    stroke: #ff9800 !important;
+}
+
+.webui-icon-error {
+    color: #f44336 !important;
+    stroke: #f44336 !important;
+}
+
+.webui-icon-info {
+    color: #2196f3 !important;
+    stroke: #2196f3 !important;
+}
+
+/* ========================================
+   SPECIFIC WEBUI INTEGRATIONS
+   ======================================== */
+
+/* Generate button icons */
+#txt2img_generate .webui-icon,
+#img2img_generate .webui-icon {
+    margin-right: 8px;
+}
+
+/* Tab icons */
+.tab-nav .webui-icon {
+    margin-right: 4px;
+    width: 14px;
+    height: 14px;
+}
+
+/* Settings icons */
+#quicksettings .webui-icon {
+    margin-right: 4px;
+    color: #d0d0d0 !important;
+    stroke: #d0d0d0 !important;
+}
+
+/* Gallery icons */
+.extra-network-pane .webui-icon {
+    color: #b0b0b0 !important;
+    stroke: #b0b0b0 !important;
+}
+
+.extra-network-pane .card:hover .webui-icon {
+    color: #e20074 !important;
+    stroke: #e20074 !important;
+}
+
+/* Footer icons */
+#footer .webui-icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+}
+
+/* Progress icons */
+.progressDiv .webui-icon {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+}
+
+/* Tool button icons */
+.gradio-button.tool .webui-icon {
+    margin-right: 0;
+    width: 16px;
+    height: 16px;
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+    .webui-icon {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .webui-icon-large {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .webui-icon-huge {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* ========================================
+   END ICON STYLES
+   ======================================== */
+
+// Fixed Gradio Icon Replacement Script
+// Add this to your style.css AFTER the Lucide loading script
+
+<script>
+(function() {
+    console.log('🎯 Starting Gradio icon replacement system...');
+    
+    const iconMap = {
+        '🎲': '<i data-lucide="dice-6" class="webui-icon"></i>',
+        '♻️': '<i data-lucide="refresh-cw" class="webui-icon"></i>',
+        '📂': '<i data-lucide="folder" class="webui-icon"></i>',
+        '⚙️': '<i data-lucide="settings" class="webui-icon"></i>',
+        '🔍': '<i data-lucide="search" class="webui-icon"></i>',
+        '💾': '<i data-lucide="save" class="webui-icon"></i>',
+        '🗑️': '<i data-lucide="trash-2" class="webui-icon"></i>',
+        '📋': '<i data-lucide="clipboard" class="webui-icon"></i>',
+        '🔄': '<i data-lucide="refresh-cw" class="webui-icon"></i>',
+        '🎯': '<i data-lucide="target" class="webui-icon"></i>',
+        '🛈': '<i data-lucide="info" class="webui-icon"></i>',
+        '🛠': '<i data-lucide="wrench" class="webui-icon"></i>',
+        '⎘': '<i data-lucide="copy" class="webui-icon"></i>',
+        'Generate': '<i data-lucide="play" class="webui-icon"></i>Generate',
+        'Interrupt': '<i data-lucide="square" class="webui-icon"></i>Interrupt',
+        'Skip': '<i data-lucide="skip-forward" class="webui-icon"></i>Skip'
+    };
+    
+    function waitForLucide(callback) {
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+            console.log('✅ Lucide is ready, starting icon replacement');
+            callback();
+        } else {
+            console.log('⏳ Waiting for Lucide to load...');
+            setTimeout(() => waitForLucide(callback), 500);
+        }
+    }
+    
+    function replaceIconsInElement(element) {
+        if (!element || !element.innerHTML) return;
+        
+        let originalHTML = element.innerHTML;
+        let newHTML = originalHTML;
+        let changed = false;
+        
+        Object.entries(iconMap).forEach(([oldIcon, newIcon]) => {
+            if (newHTML.includes(oldIcon)) {
+                newHTML = newHTML.replace(new RegExp(oldIcon, 'g'), newIcon);
+                changed = true;
+            }
+        });
+        
+        if (changed) {
+            element.innerHTML = newHTML;
+            console.log('🔄 Replaced icons in:', element.tagName, element.className || element.id || '');
+        }
+    }
+    
+    function replaceAllIcons() {
+        // Target specific Gradio elements and common containers
+        const selectors = [
+            'button',
+            '.gradio-button',
+            '.tab-nav button',
+            '.gradio-textbox label',
+            '.gradio-dropdown label',
+            '.gradio-slider label',
+            '.gradio-checkbox label',
+            '.gradio-radio label',
+            '.gradio-accordion .label-wrap',
+            '#quicksettings span',
+            '#quicksettings label',
+            '.extra-network-pane button',
+            '.extra-network-pane .card .actions',
+            '#footer a',
+            '.gradio-html',
+            '.gr-button',
+            '[role="button"]'
+        ];
+        
+        let replacementCount = 0;
+        
+        selectors.forEach(selector => {
+            try {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(element => {
+                    const before = element.innerHTML;
+                    replaceIconsInElement(element);
+                    if (element.innerHTML !== before) {
+                        replacementCount++;
+                    }
+                });
+            } catch (e) {
+                console.warn('Error processing selector:', selector, e);
+            }
+        });
+        
+        // Re-initialize icons if we made changes and Lucide is available
+        if (replacementCount > 0 && window.lucide) {
+            try {
+                lucide.createIcons();
+                console.log(`✅ Replaced icons in ${replacementCount} elements`);
+            } catch (e) {
+                console.warn('Error creating Lucide icons:', e);
+            }
+        }
+        
+        return replacementCount;
+    }
+    
+    function startReplacementSystem() {
+        // Initial replacement
+        setTimeout(() => {
+            replaceAllIcons();
+        }, 1000);
+        
+        // Set up observer for dynamic content
+        const observer = new MutationObserver(function(mutations) {
+            let shouldReplace = false;
+            
+            mutations.forEach(function(mutation) {
+                if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === Node.ELEMENT_NODE) {
+                            // Check if the added node contains buttons or other target elements
+                            if (node.tagName === 'BUTTON' || 
+                                node.querySelector && (
+                                    node.querySelector('button') ||
+                                    node.querySelector('.gradio-button') ||
+                                    node.classList && (
+                                        node.classList.contains('gradio-button') ||
+                                        node.classList.contains('tab-nav')
+                                    )
+                                )) {
+                                shouldReplace = true;
+                            }
+                        }
+                    });
+                }
+            });
+            
+            if (shouldReplace) {
+                setTimeout(() => {
+                    const count = replaceAllIcons();
+                    if (count > 0) {
+                        console.log('🔄 Auto-replaced icons in new content');
+                    }
+                }, 200);
+            }
+        });
+        
+        // Start observing
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+        
+        console.log('🔄 Icon replacement observer activated');
+        
+        // Also run replacement periodically for any missed elements
+        setInterval(() => {
+            replaceAllIcons();
+        }, 5000);
+    }
+    
+    // Wait for Lucide to be ready, then start the replacement system
+    waitForLucide(startReplacementSystem);
+    
+})();
+</script>
