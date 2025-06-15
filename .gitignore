@@ -1,44 +1,58 @@
-__pycache__
+__pycache__/
 *.ckpt
 *.safetensors
 *.pth
 .DS_Store
+
+# Model weights and LoRA assets
+/models/**
+!/models/.gitkeep   # keep folder in repo, but not contents
+/lora/**
+!/lora/.gitkeep     # same here if you use lora folder
+
+# Upscaler model directories
 /ESRGAN/*
 /SwinIR/*
-/repositories
-/venv
-/tmp
-/model.ckpt
-/models/**/*
-/GFPGANv1.3.pth
-/gfpgan/weights/*.pth
-/ui-config.json
-/outputs
-/config.json
+
+# Common SD folders
+/repositories/
+/venv/
+/tmp/
+/outputs/
+/interrogate/
+/embeddings/
+/extensions/
+/textual_inversion/
+/config_states/
+/cache/
+
+# User/OS specific
 /log
-/webui.settings.bat
-/embeddings
-/styles.csv
-/params.txt
-/styles.csv.bak
-/webui-user.bat
-/webui-user.sh
-/interrogate
+/notification.mp3
 /user.css
-/.idea
-notification.mp3
-/SwinIR
-/textual_inversion
-.vscode
-/extensions
+/.idea/
+/.vscode/
+/node_modules/
+/package-lock.json
+
+# Misc system and test files
 /test/stdout.txt
 /test/stderr.txt
-/cache.json*
-/config_states/
-/node_modules
-/package-lock.json
-/.coverage*
 /test/test_outputs
-/cache
-trace.json
+/.coverage*
+/cache.json*
+/trace.json
 /sysinfo-????-??-??-??-??.json
+
+# Misc config
+/model.ckpt
+/config.json
+/ui-config.json
+/params.txt
+/styles.csv
+/styles.csv.bak
+/webui.settings.bat
+/webui-user.bat
+/webui-user.sh
+/GFPGANv1.3.pth
+/gfpgan/weights/*.pth

@@ -9,6 +9,9 @@ if defined GIT (set "GIT_PYTHON_GIT_EXECUTABLE=%GIT%")
 if not defined VENV_DIR (set "VENV_DIR=%~dp0%venv")
 
 set SD_WEBUI_RESTART=tmp/restart
+:: Lil Cook juice to power some batch jobs -- t$ lil batch UI/icon generation
+set COMMANDLINE_ARGS=--xformers --medvram --opt-sdp-attention --api
+
 set ERROR_REPORTING=FALSE
 
 mkdir tmp 2>NUL
