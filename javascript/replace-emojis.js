@@ -24,6 +24,8 @@
         '🔄': 'refresh-cw',
         '🎯': 'target',
         '🗃️': 'folder-archive',
+        '📎': 'cpu',
+        '📦': 'diameter',
         '🖌️': 'brush',
         '🎨️': 'palette',
         '📐': 'bomb',
@@ -31,7 +33,7 @@
         '🛠': 'wrench',
         '⎘': 'copy',
         'Generate': 'play',
-        'INTERRUPT': 'square',
+        'INTERRUPT': 'paperclip',
         'SKIP': 'skip-forward',
         '🖼️': 'image',
         '✨': 'flame'
